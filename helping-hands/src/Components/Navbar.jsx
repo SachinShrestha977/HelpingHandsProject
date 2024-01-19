@@ -7,6 +7,7 @@ const Navbar = () => {
   const handleMenuToggler = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   const navItems = [
     {
       path: "/",

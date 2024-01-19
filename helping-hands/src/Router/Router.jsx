@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Route, Routes, createBrowserRouter } from "react-router-dom";
 import App from "../App.jsx";
 import Home from "../Pages/Home.jsx";
 import About from "../Pages/About.jsx";
@@ -10,6 +10,7 @@ import EmployerLogin from "../Pages/EmployerLogin.jsx";
 import EmployeeLogin from "../Pages/EmployeeLogin.jsx";
 import EmployerSignUp from "../Pages/EmployerSignUp.jsx";
 import EmployeeSignUp from "../Pages/EmployeeSignUp.jsx";
+import VerifyEmail from "../Pages/VerifyEmail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
         path: "employeeLogin",
         element: <EmployeeLogin></EmployeeLogin>,
       },
+
       {
         path: "sign-up",
         element: <SignUp></SignUp>,
@@ -55,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "employeeSignUp",
         element: <EmployeeSignUp></EmployeeSignUp>,
+      },
+      {
+        path: "verify-email",
+        element: <VerifyEmail></VerifyEmail>,
       },
     ],
   },

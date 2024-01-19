@@ -3,6 +3,7 @@ import express, { json } from "express";
 import connectToMongoDB from "./src/databaseConnection/mongoDBConnection.js";
 import { port } from "./src/config.js";
 import postJobRouter from "./src/Router/postJobRouter.js";
+import userRouter from "./src/Router/userRouter.js";
 let expressApp = express();
 expressApp.use(json()); // Always place this code at top of the router
 expressApp.use(cors());
@@ -13,3 +14,4 @@ expressApp.listen(port, () => {
 connectToMongoDB();
 
 expressApp.use("/", postJobRouter);
+expressApp.use("/users", userRouter);

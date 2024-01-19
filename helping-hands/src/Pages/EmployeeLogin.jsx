@@ -1,14 +1,35 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EmployeeLogin = () => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    // Perform your login logic here
-    console.log("Logging in with:", { email, password });
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    let data = {
+      email: email,
+      password: password,
+    };
+    try {
+      let result = await axios({
+        url: "http://localhost:4000/users/login",
+        method: "POST",
+        data: data,
+      });
+      console.log(result.data.token);
+      toast.success("Login Successful");
+      navigate("/");
+      window.location.reload();
+
+      localStorage.setItem("token", result.data.token);
+    } catch (error) {
+      toast.error("Email and password do not match");
+    }
   };
 
   const handleForgotPassword = () => {
@@ -19,6 +40,7 @@ const EmployeeLogin = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-96 bg-white p-8 rounded shadow-md">
+        <ToastContainer></ToastContainer>
         <h2 className="text-2xl font-semibold mb-4">Employee Login</h2>
         <div className="mb-4">
           <label
