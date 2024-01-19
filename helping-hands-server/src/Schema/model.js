@@ -1,6 +1,8 @@
 import { model } from "mongoose";
+import employeeSchema from "./employeeSchema.js";
 import postJob from "./postJob.js";
-import userSchema from "./userSchema.js";
+import employerSchema from "./employerSchema.js";
 
 export let PostJob = model("PostJob", postJob);
-export let User = model("User", userSchema);
+export let Employee = model("Employee", employeeSchema);
+export let Employer = model("Employer", employerSchema);

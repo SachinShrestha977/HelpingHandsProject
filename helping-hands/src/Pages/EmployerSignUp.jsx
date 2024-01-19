@@ -1,19 +1,46 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar from "../Components/Navbar";
 
 const EmployerSignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   let navigate = useNavigate();
-  const handleSignup = () => {
-    // Perform your signup logic here
-    console.log("Signing up with:", { fullName, email, password });
+
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    let formData = {
+      fullName: fullName,
+      email: email,
+      password: password,
+    };
+    console.log(formData);
+    formData = { ...formData, role: "employer" };
+    try {
+      let result = await axios({
+        url: "http://localhost:4000/employer",
+        method: "POST",
+        data: formData,
+      });
+      console.log(result);
+      toast.success(
+        "Registered!! Check mail for further verification process."
+      );
+      setRegistrationSuccess(true);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-96 bg-[#FAFAFA] p-8 rounded shadow-md">
+        <ToastContainer />
         <h2 className="text-2xl font-semibold mb-4">Employer Sign Up</h2>
         <div className="mb-4">
           <label
@@ -64,12 +91,13 @@ const EmployerSignUp = () => {
           />
         </div>
         <button
+          onClick={handleSubmit}
           className="w-full bg-blue text-white p-2 rounded hover:bg-blue-600 focus:outline-none"
-          onClick={handleSignup}
         >
           Sign Up
         </button>
       </div>
+      <Outlet></Outlet>
     </div>
   );
 };

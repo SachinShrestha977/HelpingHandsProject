@@ -11,6 +11,7 @@ import EmployeeLogin from "../Pages/EmployeeLogin.jsx";
 import EmployerSignUp from "../Pages/EmployerSignUp.jsx";
 import EmployeeSignUp from "../Pages/EmployeeSignUp.jsx";
 import VerifyEmail from "../Pages/VerifyEmail.jsx";
+import EmployerVerifyEmail from "../Pages/EmployerVerifyEmail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "verify-email",
         element: <VerifyEmail></VerifyEmail>,
+      },
+      {
+        path: "employerVerify-email",
+        element: <EmployerVerifyEmail></EmployerVerifyEmail>,
       },
     ],
   },

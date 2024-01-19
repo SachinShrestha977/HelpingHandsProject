@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-let userSchema = Schema({
+let employeeSchema = Schema({
   fullName: {
     type: String,
     required: [true, "fullName is required"],
@@ -22,4 +22,4 @@ let userSchema = Schema({
   },
 });
 
-export default userSchema;
+export default employeeSchema;

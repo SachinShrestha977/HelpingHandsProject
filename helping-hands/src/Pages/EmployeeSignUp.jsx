@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from "../Components/Navbar";
 
 const EmployeeSignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   let navigate = useNavigate();
 
   let handleSubmit = async (e) => {
@@ -21,7 +23,7 @@ const EmployeeSignUp = () => {
     formData = { ...formData, role: "employee" };
     try {
       let result = await axios({
-        url: "http://localhost:4000/users",
+        url: "http://localhost:4000/employee",
         method: "POST",
         data: formData,
       });
@@ -29,6 +31,7 @@ const EmployeeSignUp = () => {
       toast.success(
         "Registered!! Check mail for further verification process."
       );
+      setRegistrationSuccess(true);
     } catch (error) {
       console.log(error.message);
     }

@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "../Schema/model.js";
 import { secretKey } from "../config.js";
 import { sendMail } from "../Utils/sendmail.js";
+import { Employee } from "../Schema/model.js";
 
 export let createUser = async (req, res, next) => {
   try {
@@ -15,7 +15,7 @@ export let createUser = async (req, res, next) => {
       password: hashPassword,
       isVerifiedEmail: false,
     };
-    let result = await User.create(data);
+    let result = await Employee.create(data);
     res.status(200).json({
       success: true,
       message: "User created successfully",
@@ -57,7 +57,7 @@ export let verifyEmail = async (req, res, next) => {
     // get _id from infoObj
     let userId = infoObj._id;
 
-    let result = await User.findByIdAndUpdate(
+    let result = await Employee.findByIdAndUpdate(
       userId,
       {
         isVerifiedEmail: true,
@@ -83,7 +83,7 @@ export let loginUser = async (req, res, next) => {
   let password = req.body.password;
 
   try {
-    let user = await User.findOne({ email: email }); //checking if email exists or not
+    let user = await Employee.findOne({ email: email }); //checking if email exists or not
     // console.log(user)
     if (user === null) {
       res.status(400).json({

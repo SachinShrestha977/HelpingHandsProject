@@ -17,7 +17,7 @@ const EmployeeLogin = () => {
     };
     try {
       let result = await axios({
-        url: "http://localhost:4000/users/login",
+        url: "http://localhost:4000/employee/login",
         method: "POST",
         data: data,
       });
