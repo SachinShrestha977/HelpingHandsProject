@@ -129,10 +129,12 @@ export let loginUser = async (req, res, next) => {
 export let myProfile = async (req, res, next) => {
   try {
     let id = req.id;
-    let result = await User.findById(id);
+    console.log(id);
+    let result = await Employer.findById(id);
+
     res.json({
       success: true,
-      message: "User read successfully",
+      message: "Employer read successfully",
       result: result,
     });
   } catch (error) {

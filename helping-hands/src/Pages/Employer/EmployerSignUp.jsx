@@ -1,47 +1,65 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from "../../Components/Navbar";
+import { MyContext } from "../../ContextApi/MyContext";
+import EmployerLogin from "./EmployerLogin";
 
-const EmployeeLogin = () => {
-  let navigate = useNavigate();
+const EmployerSignUp = () => {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
+  let navigate = useNavigate();
+
+  let handleSubmit = async (e) => {
     e.preventDefault();
-    let data = {
+    let formData = {
+      fullName: fullName,
       email: email,
       password: password,
     };
+    console.log(formData);
+    formData = { ...formData, role: "employer" };
     try {
       let result = await axios({
-        url: "http://localhost:4000/employer/login",
+        url: "http://localhost:4000/employer",
         method: "POST",
-        data: data,
+        data: formData,
       });
-      console.log(result.data.token);
-      toast.success("Login Successful");
-      navigate("/");
-      window.location.reload();
-
-      localStorage.setItem("token", result.data.token);
+      console.log(result);
+      toast.success(
+        "Registered!! Check mail for further verification process."
+      );
+      setRegistrationSuccess(true);
     } catch (error) {
-      toast.error("Email and password do not match");
+      console.log(error.message);
     }
-  };
-
-  const handleForgotPassword = () => {
-    // Implement your forgot password logic here
-    console.log("Forgot password clicked");
   };
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="w-96 bg-white p-8 rounded shadow-md">
-        <ToastContainer></ToastContainer>
-        <h2 className="text-2xl font-semibold mb-4">Employer Login</h2>
+      <div className="w-96 bg-[#FAFAFA] p-8 rounded shadow-md">
+        <ToastContainer />
+        <h2 className="text-2xl font-semibold mb-4">Employer Sign Up</h2>
+        <div className="mb-4">
+          <label
+            htmlFor="fullName"
+            className="block text-gray-600 text-sm font-medium mb-2"
+          >
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="fullName"
+            className="w-full border rounded px-3 py-2 outline-none"
+            placeholder="Enter your full name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+        </div>
         <div className="mb-4">
           <label
             htmlFor="email"
@@ -75,23 +93,15 @@ const EmployeeLogin = () => {
           />
         </div>
         <button
+          onClick={handleSubmit}
           className="w-full bg-blue text-white p-2 rounded hover:bg-blue-600 focus:outline-none"
-          onClick={handleLogin}
         >
-          Login
+          Sign Up
         </button>
-        <div className="mt-4 text-center">
-          <a
-            href="#"
-            className="text-blue-500 text-sm"
-            onClick={handleForgotPassword}
-          >
-            Forgot Password?
-          </a>
-        </div>
       </div>
+      <Outlet></Outlet>
     </div>
   );
 };
 
-export default EmployeeLogin;
+export default EmployerSignUp;

@@ -10,9 +10,6 @@ const JobPostingData = ({ handleChange }) => {
   const sevenDaysAgoDate = sevenDaysAgo.toISOString().slice(0, 10);
   const thirtyDaysAgoDate = thirtyDaysAgo.toISOString().slice(0, 10);
 
-  console.log(twentyFourHoursAgoDate);
-  console.log(sevenDaysAgoDate);
-  console.log(thirtyDaysAgoDate);
   return (
     <div>
       <h4 className="text-lg font-medium mb-2">Date of Posting</h4>

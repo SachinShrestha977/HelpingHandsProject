@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from "../Components/Navbar";
 
-const EmployerSignUp = () => {
+const EmployeeSignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,10 +19,10 @@ const EmployerSignUp = () => {
       password: password,
     };
     console.log(formData);
-    formData = { ...formData, role: "employer" };
+    formData = { ...formData, role: "employee" };
     try {
       let result = await axios({
-        url: "http://localhost:4000/employer",
+        url: "http://localhost:4000/employee",
         method: "POST",
         data: formData,
       });
@@ -31,7 +30,6 @@ const EmployerSignUp = () => {
       toast.success(
         "Registered!! Check mail for further verification process."
       );
-      setRegistrationSuccess(true);
     } catch (error) {
       console.log(error.message);
     }
@@ -41,7 +39,7 @@ const EmployerSignUp = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="w-96 bg-[#FAFAFA] p-8 rounded shadow-md">
         <ToastContainer />
-        <h2 className="text-2xl font-semibold mb-4">Employer Sign Up</h2>
+        <h2 className="text-2xl font-semibold mb-4">Employee Sign Up</h2>
         <div className="mb-4">
           <label
             htmlFor="fullName"
@@ -97,9 +95,8 @@ const EmployerSignUp = () => {
           Sign Up
         </button>
       </div>
-      <Outlet></Outlet>
     </div>
   );
 };
 
-export default EmployerSignUp;
+export default EmployeeSignUp;

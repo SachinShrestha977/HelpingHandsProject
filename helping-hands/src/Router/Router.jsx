@@ -1,19 +1,20 @@
-import { Route, Routes, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App.jsx";
-import Home from "../Pages/Home.jsx";
 import About from "../Pages/About.jsx";
 import CreateJob from "../Pages/CreateJob.jsx";
-import MyJobs from "../Pages/MyJobs.jsx";
+import Home from "../Pages/Home.jsx";
 import Login from "../Pages/Login.jsx";
+import MyJobs from "../Pages/MyJobs.jsx";
 import SignUp from "../Pages/SignUp.jsx";
-import EmployerLogin from "../Pages/EmployerLogin.jsx";
-import EmployeeLogin from "../Pages/EmployeeLogin.jsx";
-import EmployerSignUp from "../Pages/EmployerSignUp.jsx";
-import EmployeeSignUp from "../Pages/EmployeeSignUp.jsx";
-import VerifyEmail from "../Pages/VerifyEmail.jsx";
-import EmployerVerifyEmail from "../Pages/EmployerVerifyEmail.jsx";
+import EmployeeLogin from "../Pages/Employee/EmployeeLogin.jsx";
+import EmployerSignUp from "../Pages/Employer/EmployerSignUp.jsx";
+import EmployeeSignUp from "../Pages/Employee/EmployeeSignUp.jsx";
+import VerifyEmail from "../Pages/Employee/VerifyEmail.jsx";
+import EmployerVerifyEmail from "../Pages/Employer/EmployerVerifyEmail.jsx";
+import EmployerLogin from "../Pages/Employer/EmployerLogin.jsx";
+import EmployerProfile from "../Pages/Employer/EmployerProfile.jsx";
 
-const router = createBrowserRouter([
+const Router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "employerLogin",
         element: <EmployerLogin></EmployerLogin>,
+      },
+      {
+        path: "employerProfile",
+        element: <EmployerProfile></EmployerProfile>,
       },
       {
         path: "employeeLogin",
@@ -71,4 +76,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default router;
+export default Router;

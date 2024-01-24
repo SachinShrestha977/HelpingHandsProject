@@ -4,27 +4,34 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const EmployeeLogin = () => {
+const EmployerLogin = () => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [data, setData] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    let data = {
+    let formData = {
       email: email,
       password: password,
+      role: "employer",
     };
+    setData(formData);
+
     try {
       let result = await axios({
-        url: "http://localhost:4000/employee/login",
+        url: "http://localhost:4000/employer/login",
         method: "POST",
-        data: data,
+        data: formData,
       });
-      console.log(result.data.token);
+      // console.log(result.data.token);
       toast.success("Login Successful");
-      navigate("/");
+
+      navigate("/employerProfile");
       window.location.reload();
+
+      console.log(result.data.token);
 
       localStorage.setItem("token", result.data.token);
     } catch (error) {
@@ -41,7 +48,7 @@ const EmployeeLogin = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="w-96 bg-white p-8 rounded shadow-md">
         <ToastContainer></ToastContainer>
-        <h2 className="text-2xl font-semibold mb-4">Employee Login</h2>
+        <h2 className="text-2xl font-semibold mb-4">Employer Login</h2>
         <div className="mb-4">
           <label
             htmlFor="email"
@@ -94,4 +101,4 @@ const EmployeeLogin = () => {
   );
 };
 
-export default EmployeeLogin;
+export default EmployerLogin;

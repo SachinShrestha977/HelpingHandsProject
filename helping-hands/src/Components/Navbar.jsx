@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
+import { MyContext } from "../ContextApi/MyContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  let token = localStorage.getItem("token");
   const handleMenuToggler = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const data = useContext(MyContext);
+  // console.log("context", data?.role);
+  // console.log(data.role);
 
   const navItems = [
     {
       path: "/",
       title: "Start a search",
     },
-    {
+    token && {
       path: "/my-job",
       title: "My Jobs",
     },
@@ -22,10 +27,15 @@ const Navbar = () => {
       title: "About",
     },
 
-    {
+    token && {
       path: "/post-job",
       title: "Post a job",
     },
+
+    // {
+    //   path: "/post-job",
+    //   title: "Post a job",
+    // },
     {
       path: "/login",
       title: "Login",
@@ -34,7 +44,8 @@ const Navbar = () => {
       path: "/sign-up",
       title: "Sign-Up",
     },
-  ];
+  ].filter((item) => item);
+
   return (
     <header className="max-w-screen-2xl container mx-auto xl:px-24 px-4">
       <nav className="flex justify-between items-center py-6">
